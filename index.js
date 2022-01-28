@@ -6,12 +6,18 @@ import gradient from 'gradient-string';
 import chalkAnimation from 'chalk-animation';
 import figlet from 'figlet';
 import { createSpinner } from 'nanospinner';
+import { URL } from 'url';
 // Here we go
 import fs from "fs";
 const fsPromises = fs.promises;
 
+const __filename = new URL('', import.meta.url).pathname;
+// Will contain trailing slash
+const __dirname = new URL('.', import.meta.url).pathname;
+
 let projectName;
 let projectPath;
+let envFilePath = __dirname + '.env.example';
 let userReponses = [];
 
 // All the server based calls can be their own promises function just like the one below
@@ -25,7 +31,7 @@ async function setupProjectDirectory(path) {
     await fsPromises.mkdir(path);
 
     // Copy the .env.example file in the project directory
-    await fsPromises.copyFile( `.env.example`, `${path}/.env`);
+    await fsPromises.copyFile(`${envFilePath}`, `${path}/.env`);
   }
   catch(err) {
     console.log(`Error creating the project directory. Please try with a different name: ${err}`)

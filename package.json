@@ -12,7 +12,9 @@
   "scripts": {
     "start": "node ."
   },
-  "bin": "./index.js",
+  "bin": {
+    "create-blox-app": "./index.js"
+  },
   "dependencies": {
     "chalk": "^4.1.2",
     "chalk-animation": "^1.6.0",
